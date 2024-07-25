@@ -47,9 +47,7 @@ export const Actions = ({
   const onDelete = async () => {
     try {
       setLoading(true);
-      await axios.delete(`/api/board/${id}`, {
-        data: { boardID: id },
-      });
+      await axios.delete(`/api/board/${id}`);
       router.refresh();
       toast.success("Board deleted");
     } catch (error: any) {

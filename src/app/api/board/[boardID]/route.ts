@@ -3,13 +3,14 @@ import { auth } from "@clerk/nextjs";
 
 import db from "@/lib/db";
 
-export async function DELETE(req: Request) {
+export async function DELETE(
+  request: Request,
+  { params }: { params: { boardID: string } }
+) {
   try {
-    const body = await req.json();
-
     const { userId } = auth();
-    const { boardID } = body.data;
-
+    const { boardID } = params;
+    console.log(boardID);
     if (!userId) {
       return new NextResponse("Unauthenticated", { status: 403 });
     }
@@ -30,7 +31,6 @@ export async function DELETE(req: Request) {
     return new NextResponse("Internal error", { status: 500 });
   }
 }
-
 export async function POST(req: Request) {
   try {
     const body = await req.json();
